@@ -1,0 +1,139 @@
+body{
+  min-height: 610px;
+  width: 1278px;
+  margin: 0px auto;
+}
+
+.root{
+  display: flex;
+  align-items: center;
+}
+
+.app{
+  position: relative;
+  width: 400px;
+  height: 637px;
+  border: 1px solid rgb(199, 197, 197);
+  border-radius: 10px;
+  margin: 50px auto;
+  padding: 25px;
+}
+
+header p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 48px;
+  font-style: normal;
+  margin: 0px;
+  padding:10px 0px;
+  text-align: center;
+}
+.links{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 12px;
+  margin: 4px 0px;
+  font-size: 24px;
+}
+.links p{
+  margin: 0px;
+}
+
+a .login{
+  color: chartreuse;
+}
+
+.form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+input{
+  height: 40px;
+  width: 372px;
+
+  padding-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  color: black;
+  
+  display: flex;
+  align-items: center;
+  background: rgba(196, 196, 196, 0.46);
+  border: 0px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  outline: none;
+}
+
+.subButton{
+  margin: 10px 0px;
+  padding: 0px;
+  height: 40px;
+  width: 382px;
+  background: #67C50A;
+  border: 0px;
+  border-radius: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+}
+
+.sep{
+  display: flex;
+  flex-direction: row;
+  margin: 30px 0px;
+}
+
+.separator{
+  width: 400px;
+  height: 0px;
+  border: 0.5px solid rgb(199, 197, 197);
+  z-index: 0px;
+  margin: 8.5px;
+}
+
+.middle_separator{
+  z-index: 10px;
+  top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(199, 197, 197);
+}
+
+.logo{
+  display: flex;
+  flex-direction: row;
+  color: #67C50A;
+  font-size: 2rem;
+  padding: 0px 10px;
+  margin: 30px 0px;
+}
+
+.logo p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 26px;
+  margin: 0px;
+  padding: 0px 5px;
+}
+
+.g-signin2{
+  margin-left: 10px;
+}
+
+.create_account_text .create_account{
+  text-decoration: none;
+  color: #67C50A;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+.create_account_text{
+  position: absolute;
+  bottom:40px; 
+  left: 145px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
