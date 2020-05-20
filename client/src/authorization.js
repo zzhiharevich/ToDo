@@ -29,8 +29,6 @@ class AuthorizationPage extends Component {
   submit = async e => {
     e.preventDefault();
 
-    console.log(this.state.logValue)
-
     const response = await fetch('/authorization', {
       method: 'POST',
       headers: {
@@ -38,7 +36,7 @@ class AuthorizationPage extends Component {
       },
       body: JSON.stringify({ login: this.state.logValue, password: this.state.passValue }),
     });
-    console.log(this.state.logValue)
+    
     const body = await response.text();
     this.setState({server: body});
   }

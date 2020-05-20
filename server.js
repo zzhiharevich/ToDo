@@ -11,16 +11,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 sql_handler = new SQL_Handler();
 
-app.post('/authorization', (req, res) => {
-  //console.log(req.body);
-  sql_handler.connect();
-  var login = '';
-  sql_handler.get_login( (result) => login = result );
-  console.log('Server login: ' + login);
+const get_login = function (callback) {
+  sql_handler.get_login(function (result) { 
+    
+  });
+}
 
-  res.send(
-    `Login: ${req.body.login} \nPassword: ${req.body.password}`,
-  );
+app.post('/authorization', (req, res) => {
+
+  sql_handler.connect();
+
+  sql_handler.get_login(function (result) { 
+    if(result == req.body.login){
+      res.send(
+        `Login: ${result} Password: ${req.body.password}`
+      );
+    } else {
+      res.send('Do not correct login or password. Please try again!');
+    }
+  });
+
   sql_handler.disconnect();
 });
 

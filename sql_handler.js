@@ -10,8 +10,8 @@ class SQL_Handler {
         return mysql.createConnection({
             host: "localhost",
             user: "root",
-            database: "*db_NAME*",
-            password: "*PASSWORD*"
+            database: "to_do_app",
+            password: "111111"
         });
     }
 
@@ -28,12 +28,11 @@ class SQL_Handler {
 
     get_login(callback) {
         this.get_connection().query("SELECT login FROM user",
-            function (err, results, fields) {
-                console.log(results[0].login);
-                //console.log(err);
-                console.log(results); // собственно данные
-                //console.log(fields); // мета-данные полей
-                return callback(results[0].login);
+            function (err, results) {
+                if(err){
+                    console.log("Error: can not get login value.");
+                }
+                callback(results[0].login);
             }
         );
     }
