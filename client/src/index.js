@@ -1,11 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-  Link
+  Route
 } from "react-router-dom";
 import CreateAcc from './create_account';
 import AuthorizationPage from'./authorization';

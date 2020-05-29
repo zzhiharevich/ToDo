@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './index.css';
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

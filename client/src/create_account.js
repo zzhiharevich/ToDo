@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class CreateAccountPage extends Component {
     constructor(props) {

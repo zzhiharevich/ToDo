@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require("mysql2");
 const SQL_Handler = require('./SQL_Handler');
 
 const app = express();
@@ -11,34 +10,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 sql_handler = new SQL_Handler();
 
-const get_login = function (callback) {
-  sql_handler.get_login(function (result) { 
-    
-  });
-}
-
 app.post('/authorization', (req, res) => {
 
-  sql_handler.connect();
-
-  sql_handler.get_login(function (result) { 
-    if(result == req.body.login){
-      res.send(
-        `Login: ${result} Password: ${req.body.password}`
-      );
+  sql_handler.authentication(function (result, msg) { 
+    if(result) {
+      res.send(msg);
     } else {
-      res.send('Do not correct login or password. Please try again!');
+      res.send(`Authorization error. ${msg}`);
     }
-  });
+  }, req.body.login, req.body.password);
 
-  sql_handler.disconnect();
 });
 
 app.post('/create_account', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `Name: ${req.body.name} \nLogin: ${req.body.login} \nPassword: ${req.body.password}`,
-  );
+
+  sql_handler.create_user(req.body.login, req.body.password, req.body.name, function (result, msg) {
+    if (result) {
+      res.send(msg);
+    } else {
+      res.send(msg);
+    }
+  });
+
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
