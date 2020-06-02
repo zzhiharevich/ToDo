@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './index.css';
+import './../index.css';
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -61,7 +61,7 @@ class CreateAccountPage extends Component {
                     <FontAwesomeIcon icon={faChevronCircleDown} />
                     <p>ToDo</p>
                 </div>
-                <div className="links">
+                <div className="page-title">
                     <p>
                         Create Account
                     </p>
@@ -78,14 +78,8 @@ class CreateAccountPage extends Component {
                     </label>
                     <button type="submit" className="subButton">{this.state.subValue}</button>
                 </form>
-                <div className="sep">
-                    <div className="separator"></div>
-                    <div className="middle_separator">OR</div>
-                    <div className="separator"></div>
-                </div>
-                <div className="g-signin2" data-width="380" data-height="40" data-longtitle="true" data-onsuccess="onSignIn"></div>
                 <p>{this.state.server}</p>
-                <p className="create_account_text">Already have an account? <Link to="/">Aothorization</Link></p>
+                <p className="link-text">Already have an account? <Link to="/">Authorization</Link></p>
             </div>
         );
     }

@@ -2,18 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from "react-router-dom";
-import CreateAcc from './create_account';
-import AuthorizationPage from'./authorization';
+import CreateAcc from './pages/create_account';
+import AuthorizationPage from './pages/authorization';
+import TodayPage from './pages/today';
 import './index.css';
 
-function App(){
-  return(
+function App() {
+  return (
     <Router>
-        <Route path="/" exact exact component={AuthorizationPage} />
-        <Route path="/create_account" exact component={CreateAcc} />
-     </Router>
+      <Switch>
+        <Route path="/" exact component={AuthorizationPage} />
+        <Route path="/create_account" component={CreateAcc} />
+        <Route path="/today" component={TodayPage}/>
+      </Switch>
+    </Router >
   )
 }
 

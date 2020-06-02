@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
-import './index.css';
+import './../index.css';
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -10,7 +10,7 @@ class AuthorizationPage extends Component {
     this.state = {
       logValue: '',
       passValue: '',
-      subValue: 'LogIn',
+      subValue: 'Log In',
       server: ''
     };
 
@@ -31,7 +31,12 @@ class AuthorizationPage extends Component {
     });
     
     const body = await response.text();
+    if(body === 'Valid user') {
+      console.log('OK');
+      window.location.assign('/today');
+    }
     this.setState({server: body});
+
   }
 
   logHandleChange(event){
@@ -50,9 +55,9 @@ class AuthorizationPage extends Component {
         <FontAwesomeIcon icon={faChevronCircleDown} />
         <p>ToDo</p>
         </div>
-        <div className="links">
+        <div className="page-title">
           <p>
-            LogIn
+            Log In
           </p>
         </div>
         <form className="form" onSubmit={this.submit}>
@@ -64,14 +69,8 @@ class AuthorizationPage extends Component {
           </label>
           <button type="submit" className="subButton">{this.state.subValue}</button>
         </form>
-        <div className="sep">
-          <div className="separator"></div>
-          <div className="middle_separator">OR</div>
-          <div className="separator"></div>
-        </div>
-        <div className="g-signin2" data-width="380" data-height="40" data-longtitle="true" data-onsuccess="onSignIn"></div>
         <p>{this.state.server}</p>
-        <p className="create_account_text">No account? <Link to="/create_account">Create account</Link></p>
+        <p className="link-text">No account? <Link to="/create_account">Create account</Link></p>
       </div>
     );
   }
