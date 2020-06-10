@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './../index.css';
-import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronCircleDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideNav from './../сommon_component/sidenav';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Schedule(props) {
     let p = React.createElement('p', null, `${props.n}`);
-    let time = React.createElement('div', {className: `time-${props.n}`}, p);
-    let text_area = React.createElement('div', {className: `text-area-${props.n}`, onClick: props.e});
+    let time = React.createElement('div', { className: `time-${props.n}` }, p);
+    let text_area = React.createElement('div', { className: `text-area-${props.n}`, onClick: props.e });
 
-    return (React.createElement('div', {className: `element-${props.n}`}, [time, text_area]));
+    return (React.createElement('div', { className: `element-${props.n}` }, [time, text_area]));
+}
+
+function DateInput(props) {
+    return (<button id='date-input' onClick={props.onClick}>{props.value}</button>);
 }
 
 function ScheduleTask(props) {
@@ -26,29 +32,49 @@ class TodayPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {        }
+        this.state = {
+            navFlag: false,
+            date: '',
+            startDate: new Date(),
+            elementCounter: '',
+        }
         this.doNav = this.doNav.bind();
         this.renderSchedule = this.renderSchedule.bind();
         this.showScheduleTask = this.showScheduleTask.bind();
+        this.addTask = this.addTask.bind();
     }
-
-    sidenav = document.querySelector('.sidenav');
 
     showScheduleTask = () => {
         console.log('event');
     }
 
     renderSchedule = (value) => {
-        return (<Schedule n={value} e={this.showScheduleTask}/>)
+        return (<Schedule n={value} e={this.showScheduleTask} />)
+    }
+
+    addTask = () => {
+        let root = document.querySelector('.existing-tasks');
+
+        let button = document.createElement('button');
+        let element = document.createElement('div');
+        element.className = `element-`;
+        element.innerHTML='<p>To finish this page!</p>';
+
+        root.appendChild(element);
+        console.log('new task');
     }
 
     doNav = () => {
+        let sidenav = document.querySelector('.sidenav');
+        let btn = document.querySelector('.sidenav-button');
         if (this.state.navFlag === false) {
-            document.querySelector('.sidenav').style.width = "0px";
+            sidenav.style.width = "0px";
             this.setState({ navFlag: true });
+            btn.innerHTML = '>';
         } else {
-            document.querySelector('.sidenav').style.width = "250px";
+            sidenav.style.width = "250px";
             this.setState({ navFlag: false });
+            btn.innerHTML = '<';
         }
     }
 
@@ -91,9 +117,19 @@ class TodayPage extends Component {
                             {this.renderSchedule(12)}
                         </div>
                         <div className="part-2">
-                            <p>DATE</p>
-                            <div className="list">
+                            <div id='date-picker'>
+                                <DatePicker
+                                    selected={this.state.startDate}
+                                    onChange={date => this.setState({ startDate: date })}
+                                    customInput={<DateInput />}
+                                    dateFormat='MMMM d, yyyy'
+                                />
+                            </div>
+                            <div className="tasks-list">
+                                <div className='existing-tasks'>
 
+                                </div>
+                                <button id='new-task' onClick={this.addTask}><FontAwesomeIcon icon={faPlus} /></button>
                             </div>
                         </div>
                     </div>
