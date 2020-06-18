@@ -62,7 +62,7 @@ class AuthorizationPage extends Component {
         </div>
         <form className="form" onSubmit={this.submit}>
           <label>
-            <input type="text" value={this.state.logValue} onChange={this.logHandleChange} placeholder="LogIn"></input>
+            <input type="text" value={this.state.logValue} onChange={this.logHandleChange} placeholder="Login"></input>
           </label>
           <label>
             <input type="password" value={this.state.passValue} onChange={this.passHandleChange} placeholder="Password"></input>

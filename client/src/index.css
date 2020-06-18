@@ -215,7 +215,7 @@ input {
 [class*="element-"] {
     display: flex;
     flex-direction: row;
-    margin: 3px;
+    margin: 10px;
 }
 
 [class*="element-"] [class*="time-"] {
@@ -283,16 +283,32 @@ input {
     border: none;
     border-radius: 30px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-    font-size: 20px;
+    font-size: 18px;
     color: #67C50A;
     background: none;
     outline: none;
     padding: 0px;
+    margin: 5px;
 }
 
 #new-task:hover {
     color: white;
     background: #67C50A;
+}
+
+[class*="done-task-"] {
+    width: 20px;
+    height: 20px;
+    border: 0.2px solid rgba(0, 0, 0, 0.288);
+    border-radius: 30px;
+    background: none;
+    outline: none;
+    padding: 0px;
+}
+
+[class*="text-task-"] {
+    margin: 0px;
+    padding-left: 10px;
 }
 
 .part-2 {
@@ -301,6 +317,53 @@ input {
     height: 95%;
     display: flex;
     flex-direction: column;
+}
+
+.new-task-form {
+    border: 0.2px solid black;
+    border-radius: 10px;
+    padding: 7px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    display: block;
+}
+
+.new-task-input {
+    width: 99%;
+    padding: 0px;
+    margin: 3px 0px;
+    padding-left: 5px;
+}
+
+.new-task-btn {
+    align-self: flex-end;
+    width: 25%;
+    margin-left: 76%;
+}
+
+.new-task-btn .ok-btn, .cancel-btn {
+    margin: 2px 5px;
+    border-radius: 20px;
+    border: none;
+    background: none;
+    width: 20px;
+    height: 20px;
+    padding: 0%;
+    outline: none;
+}
+
+.new-task-btn .ok-btn:hover, .cancel-btn:hover {
+    font-size: 15px;
+}
+
+.new-task-btn .ok-btn {
+    color: #67C50A;
+}
+
+.new-task-btn .cancel-btn {
+    color: red;
 }
 
 ::-webkit-scrollbar {

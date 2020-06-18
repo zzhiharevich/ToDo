@@ -39,6 +39,9 @@ class CreateAccountPage extends Component {
         });
 
         const body = await response.text();
+        if(body === 'Inserted'){
+            window.location.assign('/today');
+        }
         this.setState({ server: body });
     }
 
