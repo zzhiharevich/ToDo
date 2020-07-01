@@ -32,11 +32,10 @@ class AuthorizationPage extends Component {
     
     const body = await response.text();
     if(body === 'Valid user') {
-      console.log('OK');
       window.location.assign('/today');
+    } else {
+      alert('Invalid login or password.\nTry again.')
     }
-    this.setState({server: body});
-
   }
 
   logHandleChange(event){
@@ -69,7 +68,6 @@ class AuthorizationPage extends Component {
           </label>
           <button type="submit" className="subButton">{this.state.subValue}</button>
         </form>
-        <p>{this.state.server}</p>
         <p className="link-text">No account? <Link to="/create_account">Create account</Link></p>
       </div>
     );

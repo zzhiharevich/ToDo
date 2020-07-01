@@ -8,15 +8,18 @@ import {
 import CreateAcc from './pages/create_account';
 import AuthorizationPage from './pages/authorization';
 import TodayPage from './pages/today';
+import HomePage from './pages/home';
+import ProtectedRoute from './pages/protectedRoutes';
 import './index.css';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={AuthorizationPage} />
-        <Route path="/create_account" component={CreateAcc} />
-        <Route path="/today" component={TodayPage}/>
+        <Route path="/" exact component={HomePage} />
+        <ProtectedRoute path="/authorization" component={AuthorizationPage} />
+        <ProtectedRoute path="/create_account" component={CreateAcc} />
+        <ProtectedRoute path="/today" component={TodayPage}/>
       </Switch>
     </Router >
   )

@@ -23,10 +23,7 @@ class SQL_Handler {
     connect() {
         this.get_connection().connect(function (err) {
             if (err) {
-                return console.error("Ошибка: " + err.message);
-            }
-            else {
-                console.log("Подключение к серверу MySQL успешно установлено");
+                console.log(`Error: DB connection error\n${err}`);
             }
         });
     }
@@ -39,18 +36,15 @@ class SQL_Handler {
 
         this._connection.query(sql, [login], function(err, results) {
             if (err) {
-                console.log('Error: can not selet user info');
-                throw Error;
+                console.log(`Error: can not selet user info\n${err}`);
             }
 
             if (results.length == 0) {
-                console.log('No such user');
                 callback(false, 'User with this login do not exist');
                 return;
             }
 
             if (results[0].password != password) {
-                console.log('Incorect password');
                 callback(false, 'Incorrect password');
             } else {
                 callback(true, 'Valid user');
@@ -66,14 +60,12 @@ class SQL_Handler {
         this._connection.query(sql_select, [login],
             function(err, results) {
                 if (err) {
-                    console.log('Error: can not selet user info');
-                    throw Error;
+                    console.log(`Error: can not selet user info\n${err}`);
                 }
 
                 if (results.length == 0) {
                     callback(false, 'User with this login do not exist');
                 } else {
-                    console.log(results)
                     callback(true, 'User with with login already exist. Try another one.');
                 }
             }
@@ -86,8 +78,7 @@ class SQL_Handler {
         this._connection.query(sql_insert, [login, password, name], function(err) {
             if(err) {
                 callback(false, 'Error');
-                console.log('Error: can not insert user info');
-                throw Error;
+                console.log(`Error: can not insert user info\n${err}`);
             }
 
             callback(true, 'Inserted!');
@@ -103,7 +94,6 @@ class SQL_Handler {
         this._connection.query(sql, [login, password, name], function(err) {
             if(err) {
                 callback(false, 'User with this login already exist. Try another please.');
-                //console.log(err);
             }
             else callback(true, 'Inserted');
         });
@@ -111,12 +101,12 @@ class SQL_Handler {
         this.disconnect();
     }
 
-    create_new_task(id, date, task, status, callback){
+    create_new_task(id, date, task, status, user, callback){
         this.connect();
 
-        let sql = 'INSERT INTO tasks (task_id, date, task_content, status) VALUES (?, ?, ?, ?)';
+        let sql = 'INSERT INTO tasks (task_id, date, task_content, status, user) VALUES (?, ?, ?, ?, ?)';
 
-        this._connection.query(sql, [id, date, task, status], function(err) {
+        this._connection.query(sql, [id, date, task, status, user], function(err) {
             if(err) {
                 callback(false, `Can not insert new task: ${err}`);
             } else {
@@ -127,10 +117,26 @@ class SQL_Handler {
         this.disconnect();
     }
 
-    get_avaliable_task_number(callback) {
+    delete_task(id, callback) {
         this.connect();
 
-        let sql = 'SELECT COUNT(*) AS rowsNumber FROM tasks';
+        let sql = 'DELETE FROM tasks WHERE task_id = ?';
+
+        this._connection.query(sql, [id], function(err) {
+            if(err) {
+                callback(false, `Error: ${err}`);
+            } else {
+                callback(true, 'Deleted');
+            }
+        })
+
+        this.disconnect();
+    }
+
+    get_avaliable_task_number(table, callback) {
+        this.connect();
+
+        let sql = `SELECT COUNT(*) AS rowsNumber FROM ${table}`;
 
         this._connection.query(sql, function(err, results) {
             if(err) {
@@ -143,12 +149,12 @@ class SQL_Handler {
         this.disconnect();
     }
 
-    select_task_by_date(date, callback){
+    select_task_by_date(date, user, callback){
         this.connect();
 
-        let sql = 'SELECT * FROM tasks WHERE date = ?';
+        let sql = 'SELECT * FROM tasks WHERE date = ? AND user = ?';
 
-        this._connection.query(sql, [date], function(err, results) {
+        this._connection.query(sql, [date, user], function(err, results) {
             if(err) {
                 callback(false, 'Can not select tasks', null);
             } else {
@@ -175,15 +181,59 @@ class SQL_Handler {
         this.disconnect();
     }
 
+    select_schedule_tasks(date, user, callback) {
+        this.connect();
+
+        let sql = 'SELECT * FROM schedule WHERE date = ? AND user = ?';
+
+        this._connection.query(sql, [date, user], function(err, res) {
+            if(err) {
+                callback(false, `Error: ${err}`);
+            } else {
+                callback(true, res);
+            }
+        })
+
+        this.disconnect();
+    }
+
+    delete_schedule_task(id, user, callback) {
+        this.connect();
+
+        let sql = 'DELETE FROM schedule WHERE schedule_task_id = ? AND user = ?';
+
+        this._connection.query(sql, [id, user], function(err, res) {
+            if(err) {
+                callback(false, `Error: ${err}`);
+            } else {
+                callback(true, 'Deleted');
+            }
+        })
+
+        this.disconnect();
+    }
+
+    create_schedule_task(id, time, date, content, user, callback) {
+        this.connect();
+
+        let sql='INSERT INTO schedule (time, date, content, user, schedule_task_id) VALUES (?, ?, ?, ?, ?)';
+
+        this._connection.query(sql, [time, date, content, user, id], function(err, res) {
+            if(err) {
+                callback(false, `Can not insert new schedule task:: ${err}`);
+            } else {
+                callback(true, 'Inserted');
+            }
+        })
+    }
+
     disconnect() {
         this._connection.end(function (err) {
             if (err) {
-                return console.log("Ошибка: " + err.message);
+                return console.log(`Error: disconnect error\n${err}`);
             }
-            console.log("Подключение закрыто");
         });
         this._connection = null;
-        console.log(`DISCONNECT: ${this._connection}`);
     }
 }
 

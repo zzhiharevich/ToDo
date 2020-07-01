@@ -41,8 +41,9 @@ class CreateAccountPage extends Component {
         const body = await response.text();
         if(body === 'Inserted'){
             window.location.assign('/today');
+        } else {
+            alert('User with this login already exist.\nTry another one.')
         }
-        this.setState({ server: body });
     }
 
     nameHandleChange(event) {
@@ -81,8 +82,7 @@ class CreateAccountPage extends Component {
                     </label>
                     <button type="submit" className="subButton">{this.state.subValue}</button>
                 </form>
-                <p>{this.state.server}</p>
-                <p className="link-text">Already have an account? <Link to="/">Authorization</Link></p>
+                <p className="link-text">Already have an account? <Link to="/authorization">Authorization</Link></p>
             </div>
         );
     }
