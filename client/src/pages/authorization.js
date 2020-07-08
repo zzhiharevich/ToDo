@@ -32,9 +32,10 @@ class AuthorizationPage extends Component {
     
     const body = await response.text();
     if(body === 'Valid user') {
+      console.log(body);
       window.location.assign('/today');
     } else {
-      alert('Invalid login or password.\nTry again.')
+      alert(body)
     }
   }
 

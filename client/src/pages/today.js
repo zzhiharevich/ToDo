@@ -224,6 +224,8 @@ class TodayPage extends Component {
 
         const body = await (response.json());
 
+        console.log(body.session);
+
         if (body.msg === 'Inserted') {
             this.renderTask(body.rowsNumber[0].rowsNumber, this.state.newTaskInputValue, this.state.btnTaskStatus[1]);
         }
@@ -416,7 +418,11 @@ class TodayPage extends Component {
         e.preventDefault();
 
         const response = await fetch('/logout', {
-            method: 'GET'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: "logout" }),
         });
 
         const body = await response.text();
