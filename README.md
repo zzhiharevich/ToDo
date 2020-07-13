@@ -6,7 +6,7 @@ To Do is a web-site that will help you to organise your life and not to forget a
 ## Design
 ![Main page](/images/MainPage.png)
 
-## Frameworks and Libraries i used:
+## Frameworks and Libraries I used:
 * React.js
 * Node.js
 * mysql
