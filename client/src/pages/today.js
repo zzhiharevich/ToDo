@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select'
 import './../index.css';
 import { faChevronCircleDown, faPlus, faCheck, faTimes, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SideNav from './../сommon_component/sidenav';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -51,31 +49,19 @@ function ScheduleTask(props) {
     );
 }
 
-function NewTask(props) {
-    return (
-        <div className={`element-${props.id}`}>
-            <button class={`done-task${props.id}`} onClick={props.submit}></button>
-            <p class={`text-task${props.content}`}>{props.status}</p>
-        </div>
-    );
-}
-
 class TodayPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             navFlag: false,
-            date: '',
             startDate: new Date(),
             newTaskInputValue: '',
             scheduleInputValues: '',
             timeInputValue: '',
             btnTaskStatus: ['done', 'ndone'],
             addBtnFlag: false,
-            addScheduleTaskFlag: false,
         }
-        this.doNav = this.doNav.bind(this);
         this.renderSchedule = this.renderSchedule.bind(this);
         this.showScheduleTask = this.showScheduleTask.bind(this);
         this.addTask = this.addTask.bind(this);
@@ -164,7 +150,6 @@ class TodayPage extends Component {
     showScheduleTask = (e, n) => {
         e.preventDefault()
         let element = document.querySelector(`.add-schedule-task`);
-        let style = element.style.display;
         element.style.display = 'block';
     }
 
@@ -223,8 +208,6 @@ class TodayPage extends Component {
         });
 
         const body = await (response.json());
-
-        console.log(body.session);
 
         if (body.msg === 'Inserted') {
             this.renderTask(body.rowsNumber[0].rowsNumber, this.state.newTaskInputValue, this.state.btnTaskStatus[1]);
@@ -400,20 +383,6 @@ class TodayPage extends Component {
         return (<ScheduleTask submit={this.submitScheduleTask} close={this.closeScheduleForm} inputHandler={this.scheduleInputHandler} timeHandler={this.timeInputHandler} />)
     }
 
-    doNav = () => {
-        let sidenav = document.querySelector('.sidenav');
-        let btn = document.querySelector('.sidenav-button');
-        if (this.state.navFlag === false) {
-            sidenav.style.width = "0px";
-            this.setState({ navFlag: true });
-            btn.innerHTML = '>';
-        } else {
-            sidenav.style.width = "250px";
-            this.setState({ navFlag: false });
-            btn.innerHTML = '<';
-        }
-    }
-
     logout = async (e) => {
         e.preventDefault();
 
@@ -426,7 +395,7 @@ class TodayPage extends Component {
         });
 
         const body = await response.text();
-        if(body === 'ok') {
+        if (body === 'ok') {
             window.location.assign('/authorization');
         }
     }
@@ -445,7 +414,7 @@ class TodayPage extends Component {
         return (
             <div className="page">
                 <header className='page-header'>
-                    <div className="logo" onClick={() => {window.location.assign('/')}}>
+                    <div className="logo" onClick={() => { window.location.assign('/') }}>
                         <FontAwesomeIcon icon={faChevronCircleDown} />
                         <p>ToDo</p>
                     </div>

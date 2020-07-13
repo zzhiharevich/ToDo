@@ -413,7 +413,6 @@ input {
     color: rgba(66, 65, 65, 0.932);
     outline: none;
     margin-left: auto;
-    /*margin-left: 60%;*/
 }
 
 [class*="delete-btn-task-"]:active{
@@ -537,27 +536,22 @@ input {
 
 ::-webkit-scrollbar:horizontal {
     height: 22px;
-    /* 1 - горизонтальный скроллбар */
 }
 
 ::-webkit-scrollbar-button {
     background: #b3b3b350;
     border-radius: 5px;
-    /* 2 - кнопка */
 }
 
 ::-webkit-scrollbar-track {
     background: #b3b3b31c;
-    /* 3 - трек */
 }
 
 ::-webkit-scrollbar-track-piece {
     background: #b3b3b31c;
-    /* 4 – видимая часть трека */
 }
 
 ::-webkit-scrollbar-thumb {
     background: #b3b3b356;
     border-radius: 10px;
-    /* 5 - ползунок */
 }

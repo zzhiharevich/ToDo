@@ -32,7 +32,6 @@ class AuthorizationPage extends Component {
     
     const body = await response.text();
     if(body === 'Valid user') {
-      console.log(body);
       window.location.assign('/today');
     } else {
       alert(body)

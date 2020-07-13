@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { faChevronCircleDown, faPlus, faCheck, faTimes, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faChevronCircleDown} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class HomePage extends Component {

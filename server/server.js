@@ -6,7 +6,6 @@ var mysqlStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 
 const SQL_Handler = require('./SQL_Handler');
-const { unshift } = require('mysql2/lib/constants/charset_encodings');
 
 const app = express();
 
@@ -123,7 +122,6 @@ app.post('/new-task', (req, res) => {
   sessionStore.get(id, (err, session) => {
     if (err) throw err;
     else if (session.user != null || undefined) {
-      console.log(session.user);
 
       sql_handler.get_avaliable_task_number('tasks', function (flag, msg2, rows) {
         if (flag) {
@@ -189,7 +187,6 @@ app.post('/new-schedule-task', (req, res) => {
   sessionStore.get(id, (err, session) => {
     if (err) throw err;
     else if (session.user != null || undefined) {
-      console.log(session.user);
       sql_handler.get_avaliable_task_number('schedule', function (flag, msg2, rows) {
         if (flag) {
           sql_handler.create_schedule_task(rows[0].rowsNumber, req.body.time, req.body.date, req.body.task, session.user, function (result, msg1) {
@@ -219,4 +216,4 @@ app.post('/delete-schedule-task', (req, res) => {
 
 
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.listen(PORT);

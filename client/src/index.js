@@ -9,7 +9,7 @@ import CreateAcc from './pages/create_account';
 import AuthorizationPage from './pages/authorization';
 import TodayPage from './pages/today';
 import HomePage from './pages/home';
-import ProtectedRoute from './pages/protectedRoutes';
+import ProtectedRoute from './utility/protectedRoutes';
 import './index.css';
 
 function App() {
